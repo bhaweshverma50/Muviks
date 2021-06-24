@@ -10,7 +10,7 @@ export default function Homepage() {
         <div className="container">
             <div className="heroTXT">
                 <p className="heroHeader">
-                    Welcome to MUVIKS! The all in one music and movie recommender.
+                    Welcome to <b style={{ color: '#F028F8' }}>Muviks</b>! The all in one <span style={{ color: '#3EC0CC' }}>music and movie recommender</span>.
                 </p>
                 <p className="heroDecription">
                     Click on the button below to start searching for your favourite movies or music. <br />
