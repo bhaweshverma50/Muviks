@@ -19,7 +19,7 @@ export default function Homepage() {
             </div>
 
             <div className="get_started_btn_div">
-                <Link to='/movies' id="get_started_btn">Get Started!</Link>
+                <Link to='/recommendation' id="get_started_btn">Get Started!</Link>
             </div>
         </div>
     )

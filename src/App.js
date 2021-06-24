@@ -7,7 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Homepage from './components/homepage';
 import Footer from './components/footer'
 import Header from './components/header';
-import Movies from './components/movies'
+import Recommend from './components/recommend'
 
 import {
     BrowserRouter as Router,
@@ -27,9 +27,9 @@ function App() {
                 <Header logoClass="logoBig" / >
                 <Homepage/>
             </Route>
-            <Route path="/movies" exact>
+            <Route path="/recommendation" exact>
                 <Header logoClass="logoSmall" / >
-                <Movies/>
+                <Recommend/>
             </Route>
             <Footer / >
         </div>
