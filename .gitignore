@@ -5,6 +5,7 @@
 /.pnp
 .pnp.js
 test.py
+test.txt
 # testing
 /coverage
 
