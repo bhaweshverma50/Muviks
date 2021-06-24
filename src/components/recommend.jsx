@@ -80,64 +80,64 @@ function Recommend(props) {
     const movieCom = () => {
         return (
             <div className="mContainer">
-            <Scrollbars
-                autoHeight
-                autoHide
-                autoHeightMin={0}
-                autoHeightMax={482}
-                autoHideTimeout={1000}
-                autoHideDuration={200}>
-                {Object.keys(movie).reverse().map(qMovies => {
-                    // console.log("qMovie", qMovies);
-                    return (
-                        <div className="recommendedContentContainer">
-                            <p>Recommendations based on <span>{qMovies}</span>: </p>
-                            <div className="contentContainer">
+                <Scrollbars
+                    autoHeight
+                    autoHide
+                    autoHeightMin={0}
+                    autoHeightMax={482}
+                    autoHideTimeout={1000}
+                    autoHideDuration={200}>
+                    {Object.keys(movie).reverse().map(qMovies => {
+                        // console.log("qMovie", qMovies);
+                        return (
+                            <div className="recommendedContentContainer">
+                                <p>Recommendations based on <span>{qMovies}</span>: </p>
+                                <div className="contentContainer">
 
-                                {
-                                    movie[qMovies].map(iteams => <button value={iteams.Name} onClick={handleClickOnMovie}> {iteams.Name}</button>)
-                                }
+                                    {
+                                        movie[qMovies].map(iteams => <button value={iteams.Name} onClick={handleClickOnMovie}> {iteams.Name}</button>)
+                                    }
 
+                                </div>
                             </div>
-                        </div>
-                    )
-                })}
-            </Scrollbars>
-        </div>
+                        )
+                    })}
+                </Scrollbars>
+            </div>
 
-            )
+        )
     }
 
 
     const musicCom = () => {
         return (
             <div className="mContainer">
-            <Scrollbars
-                autoHeight
-                autoHide
-                autoHeightMin={0}
-                autoHeightMax={482}
-                autoHideTimeout={1000}
-                autoHideDuration={200}>
-                {Object.keys(music).reverse().map(qMusic => {
-                    // console.log("qMovie", qMovies);
-                    return (
-                        <div className="recommendedContentContainer">
-                            <p>Recommendations based on <span>{qMusic}</span>: </p>
-                            <div className="contentContainer">
+                <Scrollbars
+                    autoHeight
+                    autoHide
+                    autoHeightMin={0}
+                    autoHeightMax={482}
+                    autoHideTimeout={1000}
+                    autoHideDuration={200}>
+                    {Object.keys(music).reverse().map(qMusic => {
+                        // console.log("qMovie", qMovies);
+                        return (
+                            <div className="recommendedContentContainer">
+                                <p>Recommendations based on <span>{qMusic}</span>: </p>
+                                <div className="contentContainer">
 
-                                {
-                                    music[qMusic].map(iteams => <button value={iteams.name} onClick={handleClickOnMovie}> {iteams.name}</button>)
-                                }
+                                    {
+                                        music[qMusic].map(iteams => <button value={iteams.name} onClick={handleClickOnMovie}> {iteams.name}</button>)
+                                    }
 
+                                </div>
                             </div>
-                        </div>
-                    )
-                })}
-            </Scrollbars>
-        </div>
+                        )
+                    })}
+                </Scrollbars>
+            </div>
 
-            )
+        )
     }
 
 
@@ -159,7 +159,7 @@ function Recommend(props) {
 
 
 
-          { selectedValue === 'movie' ? movieCom() : musicCom() }
+            {selectedValue === 'movie' ? movieCom() : musicCom()}
 
 
 
