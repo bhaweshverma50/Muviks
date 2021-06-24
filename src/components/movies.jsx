@@ -19,12 +19,12 @@ function Movies(props) {
 
     const onChangeSelect = (e) => {
         setSelectedValue(e.target.value)
-        console.log(e.target.value);
+        // console.log(e.target.value);
     }
 
     const onInputChange = (e) => {
         setSearchQuery(e.target.value)
-        console.log(searchQuery);
+        // console.log(searchQuery);
     }
 
     const isEmpty = (value) =>
@@ -41,7 +41,7 @@ function Movies(props) {
             const url = `https://movie-api909.herokuapp.com/${selectedValue}?${selectedValue === 'movie' ? 'title' : 'track'}=${searchQuery}`
             await axios.get(url)
                 .then(res => {
-                    console.log(typeof res.data);
+                    // console.log(typeof res.data);
                     setLoading(false)
                     if (typeof res.data === 'object') {
                         setContents({ ...contents, [searchQuery]: res.data })
@@ -53,7 +53,7 @@ function Movies(props) {
                     setLoading(false)
                 })
 
-            console.log(contents);
+            // console.log(contents);
         }
 
     }
@@ -61,8 +61,8 @@ function Movies(props) {
     const handleClickOnMovie = (e) => {
         if (searchQuery !== e.target.value) setSearchQuery(e.target.value)
         setSearchQuery(e.target.value)
-        console.log("clicked on movie", searchQuery);
-        console.log(e.target.value);
+        // console.log("clicked on movie", searchQuery);
+        // console.log(e.target.value);
         onSubmit()
     }
 
@@ -92,11 +92,11 @@ function Movies(props) {
                 <Scrollbars
                     autoHeight
                     autoHeightMin={0}
-                    autoHeightMax={465}
+                    autoHeightMax={500}
                     autoHideTimeout={1000}
                     autoHideDuration={200}>
                     {Object.keys(contents).reverse().map(qMovies => {
-                        console.log("qMovie", qMovies);
+                        // console.log("qMovie", qMovies);
                         return (
                             <div className="recommendedContentContainer">
                                 <p>Recommendations based on <span>{qMovies}</span>: </p>
