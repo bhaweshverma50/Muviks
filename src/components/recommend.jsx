@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { Scrollbars } from 'react-custom-scrollbars';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Loader from './loading'
-import Bugs from '../img/bugs.svg'
 import Empty from '../img/empty.svg'
 
 function Recommend(props) {
@@ -17,8 +18,6 @@ function Recommend(props) {
     const [music, setMusic] = useState({})
     //state for loading
     const [loading, setLoading] = useState(false)
-    //state for error
-    const [errImg, setErrImg] = useState(false)
     //state for no data
     const [noData, setNoData] = useState(true)
 
@@ -52,28 +51,25 @@ function Recommend(props) {
                 .then(res => {
                     // console.log(typeof res.data);
                     setLoading(false)
-                    setNoData(false)
-                    setErrImg(false)
 
                     if (typeof res.data === 'object' && selectedValue === 'movie') {
                         setMovie({ ...movie, [searchQuery]: res.data })
+                        setNoData(false)
+                        toast.success("Success! Check Recommendations")
                     }
                     if (typeof res.data === 'object' && selectedValue === 'music') {
                         setMusic({ ...music, [searchQuery]: res.data })
+                        setNoData(false)
+                        toast.success("Success! Check Recommendations")
                     }
-                    if (res.data === 'Movie not in Database') { setNoData(true) }
-
+                    if (res.data === 'Movie not in Database') { toast.error(res.data) }
+                    if (res.data === 'Sorry! Seems like there is no match') { toast.error(res.data) }
+                    console.log(res.data)
                 })
                 .catch(err => {
                     console.log(err)
                     setLoading(false)
-                    setErrImg(true)
-                    return (
-                        errImg ? <div className="emptyLogo">
-                            <img src={Bugs} alt='empty' />
-                            <h2>There is no data!</h2>
-                        </div> : null
-                    )
+                    toast.error('Oops! Server Error')
                 })
 
             // console.log(movie);
@@ -116,6 +112,10 @@ function Recommend(props) {
                         )
                     })}
                 </Scrollbars>
+                {noData ? <div className="emptyLogo">
+                    <img src={Empty} alt='empty' />
+                    <h2>There is no data!</h2>
+                </div> : null}
             </div>
 
         )
@@ -148,7 +148,12 @@ function Recommend(props) {
                         )
                     })}
                 </Scrollbars>
+                {noData ? <div className="emptyLogo">
+                    <img src={Empty} alt='empty' />
+                    <h2>There is no data!</h2>
+                </div> : null}
             </div>
+
 
         )
     }
@@ -156,6 +161,7 @@ function Recommend(props) {
 
     return (
         <div className="movie_container">
+            <ToastContainer />
             <div className="wrap">
                 <div className="search">
                     <select onChange={onChangeSelect} value={selectedValue}>
@@ -170,10 +176,10 @@ function Recommend(props) {
             </div>
 
             {loading ? <Loader /> : null}
-            {noData ? <div className="emptyLogo">
+            {/* {noData ? <div className="emptyLogo">
                 <img src={Empty} alt='empty' />
                 <h2>There is no data!</h2>
-            </div> : null}
+            </div> : null} */}
 
 
 
