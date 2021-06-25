@@ -90,7 +90,7 @@ a {
   display:flex;
   justify-content: center;
   align-content: center;
-  margin: 5px 0 5px 0;
+  margin: 70px 0 50px 0;
 }
 
 .logoSmall {
@@ -116,6 +116,9 @@ a {
     // margin-top: 80px;
     opacity: 0.2;
 
+    @media screen and (max-width: 768px) {
+      display: none;
+    }
   }
 
   h2 {
@@ -175,7 +178,7 @@ body {
   display: flex;
   justify-content: center;
   align-content: center;
-  margin-top: 20px;
+  margin-top: 50px;
 }
 
 #get_started_btn {
@@ -366,8 +369,8 @@ select {
 
   button {
     outline: none;
-    padding: 15px 30px;
-    margin: 5px 5px 5px 0;
+    padding: 10px 20px;
+    margin: 8px 8px 8px 0;
     background: #383838;
     border-radius: 30px;
     background-color: DC2D2D;

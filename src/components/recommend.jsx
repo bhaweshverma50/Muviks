@@ -3,6 +3,7 @@ import axios from 'axios'
 import { Scrollbars } from 'react-custom-scrollbars';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
 import Loader from './loading'
 import Empty from '../img/empty.svg'
 
@@ -104,7 +105,7 @@ function Recommend(props) {
                                 <div className="contentContainer">
 
                                     {
-                                        movie[qMovies].map(iteams => <button value={iteams.Name} onClick={handleClickOnMovie}> {iteams.Name}</button>)
+                                        movie[qMovies].map(iteams => <button value={iteams.Name} onClick={handleClickOnMovie}> {iteams.Name}<AiOutlineHeart style={{ fontSize: '20px', margin: '0 0 2px 12px', padding: '0 0 0px 0', color: '#aa4f4f' }} /></button>)
                                     }
 
                                 </div>
@@ -140,7 +141,7 @@ function Recommend(props) {
                                 <div className="contentContainer">
 
                                     {
-                                        music[qMusic].map(iteams => <button value={iteams.name} onClick={handleClickOnMovie}> {iteams.name}</button>)
+                                        music[qMusic].map(iteams => <button value={iteams.name} onClick={handleClickOnMovie}> {iteams.name}<AiOutlineHeart style={{ fontSize: '20px', margin: '0 0 2px 12px', padding: '0 0 0px 0', color: '#aa4f4f' }} /></button>)
                                     }
 
                                 </div>
