@@ -36,6 +36,19 @@ function Recommend(props) {
     const [bDisbaled, setBDisabled] = useState(true)
     const [noData, setNoData] = useState(true)
 
+
+    const localMovie = localStorage.getItem('movie');
+    if(localMovie){
+        // setMovie(localMovie)
+        // console.log(localMovie);
+    }
+
+    // const localMusic = JSON.parse(localStorage.getItem('music')) ;
+    // if(localMusic){
+    //     // setMusic(localMusic)
+    //     console.log(localMusic);
+    // }
+
     const onChangeSelect = (e) => {
         setSelectedValue(e.target.value)
         setSearchQuery('')
@@ -86,11 +99,13 @@ function Recommend(props) {
                         setMovie({ ...movie, [name]: res.data })
                         setNoData(false)
                         toast.success("Success! Check Recommendations")
+                        // localStorage.setItem('movie', movie);
                     }
                     if (typeof res.data === 'object' && type === 'music') {
                         setMusic({ ...music, [name]: res.data })
                         setNoData(false)
                         toast.success("Success! Check Recommendations")
+                        localStorage.setItem('music', JSON.stringify(music));
                     }
                     if (res.data === 'Movie not in Database') { toast.error(res.data) }
                     if (res.data === 'Sorry! Seems like there is no match!') { toast.error(res.data) }
