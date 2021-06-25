@@ -265,6 +265,16 @@ select {
     font-size: 12px !important;
   }
 
+  &:disabled {
+    cursor: not-allowed;
+    background-color: #84a82f;
+    color: #474747;
+
+    &:hover {
+      background-color: #84a82f;
+    }
+  }
+
   &:hover {
     background-color: #82cc33;
   }
@@ -344,6 +354,16 @@ select {
     font-size: 12px;
   }
 
+  &:disabled {
+    cursor: not-allowed;
+    background-color: #7e0974;
+    color: #a8a8a8;
+
+    &:hover {
+      background-color: #7e0974;
+    }
+  }
+
   &:hover {
     background-color: #a7109a;
   }
@@ -390,6 +410,14 @@ select {
       // margin: 10px 5px 10px 0;
       padding: 5px 12px;
       font-size: 0.9em;
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+
+      &:hover {
+        background-color: #383838;
+      }
     }
 
     &:hover {
