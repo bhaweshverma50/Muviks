@@ -287,6 +287,16 @@ select {
   }
 }
 
+select:disabled {
+  cursor: not-allowed;
+  background-color: #84a82f;
+  color: #474747;
+}
+
+select:disabled:hover {
+  background-color: #84a82f;
+}
+
 select:hover {
   background-color: #82cc33;
 }
@@ -375,6 +385,16 @@ select:hover {
   }
 }
 
+.searchButton:disabled {
+  cursor: not-allowed;
+  background-color: #7e0974;
+  color: #a8a8a8;
+}
+
+.searchButton:disabled:hover {
+  background-color: #7e0974;
+}
+
 .searchButton:hover {
   background-color: #a7109a;
 }
@@ -421,6 +441,14 @@ select:hover {
     padding: 5px 12px;
     font-size: 0.9em;
   }
+}
+
+.contentContainer button:disabled {
+  cursor: not-allowed;
+}
+
+.contentContainer button:disabled:hover {
+  background-color: #383838;
 }
 
 .contentContainer button:hover {
