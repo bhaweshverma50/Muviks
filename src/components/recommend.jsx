@@ -155,7 +155,7 @@ function Recommend(props) {
                                 <div className="contentContainer">
 
                                     {
-                                        music[qMusic].map(items => <button disabled = {loading} value={items.name} onClick={handleClickOnTitle}> {items.name}  { musicIndex.indexOf(items.name) < 0 ?  <span className="heart-icon"> <BsHeart/> </span>  :  <span className="heart-icon-fill"> <AiFillHeart/> </span>  } </button>)
+                                        music[qMusic].map(items => <button disabled = {loading || musicIndex.indexOf(items.name) >= 0} value={items.name} onClick={handleClickOnTitle}> {items.name}  { musicIndex.indexOf(items.name) < 0 ?  <span className="heart-icon"> <BsHeart/> </span>  :  <span className="heart-icon-fill"> <AiFillHeart/> </span>  } </button>)
                                     }
 
                                 </div>

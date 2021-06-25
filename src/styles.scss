@@ -90,7 +90,7 @@ a {
   display:flex;
   justify-content: center;
   align-content: center;
-  margin: 70px 0 50px 0;
+  margin: 5px 0 5px 0;
 }
 
 .logoSmall {
@@ -108,32 +108,6 @@ a {
   align-content: center;
   margin-top: 10px;
 
-}
-
-.emptyLogo {
-  img {
-    width: 200px;
-    // margin-top: 80px;
-    opacity: 0.2;
-
-    @media screen and (max-width: 768px) {
-      display: none;
-    }
-  }
-
-  h2 {
-    color: #414141;
-    text-align: center;
-    margin-top: 40px;
-    // padding-left: 25px;
-    font-weight: 600;
-  }
-
-  justify-content: center;
-  align-content: center;
-  display: flex;
-  margin: auto;
-  flex-direction: column;
 }
 
 body {
@@ -178,7 +152,7 @@ body {
   display: flex;
   justify-content: center;
   align-content: center;
-  margin-top: 50px;
+  margin-top: 20px;
 }
 
 #get_started_btn {
@@ -273,6 +247,17 @@ select {
   font-family: Sarabun;
   cursor: pointer;
 
+  &:disabled {
+    background-color: #aad64265;
+    color: #9e9e9ebe;
+    cursor: not-allowed;
+
+    &:hover{
+    background-color: #aad64265;
+
+    }
+  }
+
   @media screen and (max-width: 768px) {
     width: 120px;
     height: 30px;
@@ -298,6 +283,12 @@ select {
   font-style: normal;
   font-weight: bold;
   background-color: #1b414d;
+
+  &:disabled {
+    background-color: #57686d9a;
+    color: #9e9e9ebe;
+    cursor: not-allowed;
+  }
 
   @media screen and (max-width: 768px) {
     // width: 250px;
@@ -337,6 +328,16 @@ select {
   outline: none;
   border: none;
 
+  &:disabled {
+    background: #8b08803b;
+    color: #9e9e9ebe;
+
+    cursor: not-allowed;
+    &:hover{
+    background: #8b08803b;
+    }
+  }
+
   @media screen and (max-width: 768px) {
     width: 80px;
     height: 30px;
@@ -369,15 +370,21 @@ select {
 
   button {
     outline: none;
-    padding: 10px 20px;
-    margin: 8px 8px 8px 0;
+    padding: 10px 30px;
+    margin: 5px 5px 5px 0;
     background: #383838;
     border-radius: 30px;
+    font-weight: bold;
     background-color: DC2D2D;
     // max-width: 200px;
     border: none;
     color: whitesmoke;
     text-transform: capitalize;
+    text-align: left;
+
+    &:disabled {
+         cursor: not-allowed;
+    }
 
     @media screen and (max-width: 768px) {
       // margin: 10px 5px 10px 0;
@@ -435,4 +442,17 @@ select {
       text-transform: capitalize;
     }
   }
+}
+
+.error {
+  margin:5px 0;color:red;
+}
+
+.heart-icon{
+  margin: 0 0 0 10px;
+  color: #FF0000 !important;
+}
+.heart-icon-fill {
+  color:#FF0000 !important;
+  // background-color: red;
 }
