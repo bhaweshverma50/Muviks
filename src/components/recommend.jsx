@@ -6,9 +6,17 @@ import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Empty from '../img/empty.svg'
-import {GrDocumentDownload}  from 'react-icons/gr'
 
 function Recommend(props) {
+    // const [sugg, setSugg] = useState([])
+    // useEffect(() => {
+    //     const loadSugg = async () => {
+    //         const resu = await axios.get('https://movie-api909.herokuapp.com/movie')
+    //         setSugg(resu.data)
+    //         console.log(resu)
+    //     }
+    //     loadSugg()
+    // }, [])
 
     const [selectedValue, setSelectedValue] = useState('movie')
     const [searchQuery, setSearchQuery] = useState('')
@@ -20,7 +28,7 @@ function Recommend(props) {
     //state for loading
     const [loading, setLoading] = useState(false)
 
-    const [isDownloadDisabled, setIsDownloadDisabled] = useState(false)
+    // const [isDownloadDisabled, setIsDownloadDisabled] = useState(false)
 
 
 
@@ -171,17 +179,17 @@ function Recommend(props) {
         )
     }
 
-    const downloadFavorites = () =>{
-        const isMovieSelected =  selectedValue === 'movie'
+    const downloadFavorites = () => {
+        const isMovieSelected = selectedValue === 'movie'
         let myState = isMovieSelected ? movie : music
         const myStateIndex = Object.keys(myState);
-        let strVar = `Your Favourite ${ isMovieSelected ? 'movies': 'musics' } are: \n`
-        for(let i=0;i<myStateIndex.length;i++){
+        let strVar = `Your Favourite ${isMovieSelected ? 'movies' : 'musics'} are: \n`
+        for (let i = 0; i < myStateIndex.length; i++) {
             strVar += myStateIndex[i]
-            if(i<myStateIndex.length - 1){
+            if (i < myStateIndex.length - 1) {
                 strVar += ", "
-                let k = i+1
-                if(k%5===0){
+                let k = i + 1
+                if (k % 5 === 0) {
                     strVar += "\n"
                 }
             }
@@ -193,13 +201,13 @@ function Recommend(props) {
         myStateIndex.reverse().map(qmyState => {
             strVar += `Recommendation based on ${qmyState} \n`
 
-            for(let i=0;i<myState[qmyState].length;i++){
-                strVar += isMovieSelected ?  myState[qmyState][i].Name : myState[qmyState][i].name
+            for (let i = 0; i < myState[qmyState].length; i++) {
+                strVar += isMovieSelected ? myState[qmyState][i].Name : myState[qmyState][i].name
 
-                if(i<myState[qmyState].length - 1){
+                if (i < myState[qmyState].length - 1) {
                     strVar += " | "
-                    let k = i+1
-                    if(k%5===0){
+                    let k = i + 1
+                    if (k % 5 === 0) {
                         strVar += "\n"
                     }
                 }
@@ -214,9 +222,9 @@ function Recommend(props) {
 
 
         const element = document.createElement("a");
-        const file = new Blob([strVar], {type: 'text/plain'});
+        const file = new Blob([strVar], { type: 'text/plain' });
         element.href = URL.createObjectURL(file);
-        element.download = isMovieSelected?  "myFavouriteMovies.txt" : "myFavouriteMusics.txt";
+        element.download = isMovieSelected ? "myFavouriteMovies.txt" : "myFavouriteMusics.txt";
         document.body.appendChild(element); // Required for this to work in FireFox
         element.click();
     }
@@ -234,8 +242,11 @@ function Recommend(props) {
                     <button disabled={isDisabled || bDisbaled} onClick={onSubmit} className="searchButton">
                         Search
                     </button>
-
-                    <button disabled={isDownloadDisabled} onClick={downloadFavorites}> <GrDocumentDownload/></button>
+                </div>
+                <div>
+                    <button disabled={isDisabled || bDisbaled} onClick={downloadFavorites} className='save'>
+                        Save
+                    </button>
                 </div>
             </div>
             {loading ? <Loader /> : null}

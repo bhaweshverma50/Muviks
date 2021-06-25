@@ -14,27 +14,27 @@ import {
     Switch,
     Route,
 
-  } from "react-router-dom";
+} from "react-router-dom";
 
 function App() {
 
 
     return (
         <Router>
-        <Switch>
-        <div>
-            <Route path="/" exact>
-                <Header logoClass="logoBig" / >
-                <Homepage/>
-            </Route>
-            <Route path="/recommendation" exact>
-                <Header logoClass="logoSmall" / >
-                <Recommend/>
-            </Route>
-            <Footer / >
-        </div>
+            <Switch>
 
-        </Switch>
+                <Route path="/" exact>
+                    <Header logoClass="logoBig" />
+                    <Homepage />
+                </Route>
+                <Route path="/recommendation" exact>
+                    <Header logoClass="logoSmall" />
+                    <Recommend />
+                </Route>
+
+
+            </Switch>
+            <Footer />
         </Router>
     );
 
