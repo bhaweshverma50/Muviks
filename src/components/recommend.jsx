@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { Scrollbars } from 'react-custom-scrollbars';
 import Loader from './loading'
+import Bugs from '../img/bugs.svg'
+import Empty from '../img/empty.svg'
 
 function Recommend(props) {
 
@@ -13,9 +15,12 @@ function Recommend(props) {
     const [movie, setMovie] = useState({})
     //states for music
     const [music, setMusic] = useState({})
-
     //state for loading
     const [loading, setLoading] = useState(false)
+    //state for error
+    const [errImg, setErrImg] = useState(false)
+    //state for no data
+    const [noData, setNoData] = useState(true)
 
 
     const onChangeSelect = (e) => {
@@ -47,6 +52,8 @@ function Recommend(props) {
                 .then(res => {
                     // console.log(typeof res.data);
                     setLoading(false)
+                    setNoData(false)
+                    setErrImg(false)
 
                     if (typeof res.data === 'object' && selectedValue === 'movie') {
                         setMovie({ ...movie, [searchQuery]: res.data })
@@ -54,13 +61,19 @@ function Recommend(props) {
                     if (typeof res.data === 'object' && selectedValue === 'music') {
                         setMusic({ ...music, [searchQuery]: res.data })
                     }
-                    console.log(music);
-
+                    if (res.data === 'Movie not in Database') { setNoData(true) }
 
                 })
                 .catch(err => {
                     console.log(err)
                     setLoading(false)
+                    setErrImg(true)
+                    return (
+                        errImg ? <div className="emptyLogo">
+                            <img src={Bugs} alt='empty' />
+                            <h2>There is no data!</h2>
+                        </div> : null
+                    )
                 })
 
             // console.log(movie);
@@ -155,7 +168,12 @@ function Recommend(props) {
                     </button>
                 </div>
             </div>
+
             {loading ? <Loader /> : null}
+            {noData ? <div className="emptyLogo">
+                <img src={Empty} alt='empty' />
+                <h2>There is no data!</h2>
+            </div> : null}
 
 
 
