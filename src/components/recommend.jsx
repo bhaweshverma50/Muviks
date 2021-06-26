@@ -59,18 +59,23 @@ function Recommend(props) {
 
     const onInputChange = (text) => {
         setSearchQuery(text)
+
         setBDisabled(isEmpty(text))
-        let matches = []
+        if(selectedValue==='movie')
+       { let matches = []
         // console.log(searchQuery)
         // console.log(sugg);
         if (searchQuery.length > 0) {
             matches = list.filter(sug => {
-                const regex = new RegExp(`${searchQuery}`, 'gi')
+                const regex = new RegExp(`${text}`, 'gi')
                 return sug.match(regex)
             })
             // console.log(matches)
             setSuggestion(matches)
+        } else {
+            setSuggestion([])
         }
+    }
         // console.log(searchQuery);
     }
 
@@ -284,13 +289,16 @@ function Recommend(props) {
                     </button>
                 </div> */}
             </div>
+
+            {loading ? <Loader /> : null}
+            <div className="suggWraper">
             <div className='suggCon'>
                 {suggestion && suggestion.slice(0, 5).map((e, i) =>
                     <div className='sugg' onClick={() => suggestHandler(e)}
                         key={i} >{e}</div>
                 )}
             </div>
-            {loading ? <Loader /> : null}
+            </div>
 
             {selectedValue === 'movie' ? movieCom() : musicCom()}
 
