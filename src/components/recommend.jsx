@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState , useCallback} from 'react'
 import axios from 'axios'
 import { Scrollbars } from 'react-custom-scrollbars';
 import Loader from './loading'
@@ -12,6 +12,7 @@ let dict = require('../sugg.json')
 function Recommend(props) {
     const [list, setList] = useState([])
     const [suggestion, setSuggestion] = useState([])
+
     useEffect(() => {
         const loadSugg = async () => {
             // const resu = await axios.get('http://127.0.0.1:5000/suggestion')
@@ -35,6 +36,29 @@ function Recommend(props) {
     const [bDisbaled, setBDisabled] = useState(true)
     const [noData, setNoData] = useState(true)
 
+    const toggleNoData = useCallback(() => {
+        if(selectedValue==='movie'){
+            setNoData(Object.keys(movie).length===0)
+        }
+        else{
+            setNoData(Object.keys(music).length===0)
+        }
+    })
+
+    useEffect(()=>{
+        toggleNoData()
+    },[selectedValue])
+
+    useEffect(() => {
+        toggleNoData()
+    }, [music])
+
+    useEffect(() => {
+        toggleNoData()
+    }, [movie])
+
+
+
 
     const localMovie = localStorage.getItem('movie');
     if (localMovie) {
@@ -50,12 +74,13 @@ function Recommend(props) {
 
     const onChangeSelect = (e) => {
         setSelectedValue(e.target.value)
+        console.log(selectedValue);
         setSearchQuery('')
 
-
-        // console.log(e.target.value);
-
     }
+
+        //toggle no data based on selected value
+
 
     const onInputChange = (text) => {
         setSearchQuery(text)
@@ -65,7 +90,7 @@ function Recommend(props) {
        { let matches = []
         // console.log(searchQuery)
         // console.log(sugg);
-        if (searchQuery.length > 0) {
+        if (text.length > 0) {
             matches = list.filter(sug => {
                 const regex = new RegExp(`${text}`, 'gi')
                 return sug.match(regex)
@@ -96,6 +121,8 @@ function Recommend(props) {
         // console.log(searchQuery);
     }
 
+
+
     const onAPIFetch = (type, name) => {
 
         if (!isEmpty(type) && !isEmpty(name)) {
@@ -110,13 +137,13 @@ function Recommend(props) {
 
                     if (typeof res.data === 'object' && type === 'movie') {
                         setMovie({ ...movie, [name]: res.data })
-                        setNoData(false)
+
                         toast.success("Success! Check Recommendations")
                         // localStorage.setItem('movie', movie);
                     }
                     if (typeof res.data === 'object' && type === 'music') {
                         setMusic({ ...music, [name]: res.data })
-                        setNoData(false)
+
                         toast.success("Success! Check Recommendations")
                         localStorage.setItem('music', JSON.stringify(music));
                     }

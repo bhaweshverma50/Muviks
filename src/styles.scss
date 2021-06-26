@@ -271,47 +271,6 @@ body {
   margin: 20px 0px 0 0px;
 }
 
-.suggWraper{
-  height:10px;
-  width: 100%;
-  position: relative;
-  // border: 1px solid rgb(253, 253, 253);
-  // background: rgb(255, 247, 247);
-  display: flex;
-  justify-content: center;
-}
-
-.suggCon {
-  width: 800px;
-  position: absolute;
-  z-index: 100;
-  top:0;
-  // width: 1000px;
-  border: none;
-  border-right: none;
-  margin-right: 27px;
-  outline: none;
-  // color: #fff;
-  font-size: 17px;
-  font-family: Sarabun;
-  font-style: normal;
-  // font-weight: bold;
-  background-color: rgb(10, 64, 80);
-
-  .sugg {
-    // width: 100px;
-    color: #f8f8f8;
-    padding: 8px 0 8px 18px;
-    border-bottom: 1px solid rgba(6, 47, 59, 0.8);
-    cursor: pointer;
-    // position: absolute;
-    display: flex;
-
-    &:hover {
-      background-color: rgb(14, 55, 68);
-    }
-  }
-}
 
 select {
   width: 150px;
@@ -435,6 +394,49 @@ select {
 .alert_div {
   display: flex;
   justify-content: center;
+}
+
+.suggWraper{
+  height:10px;
+  width: 100%;
+  position: relative;
+  // border: 1px solid rgb(253, 253, 253);
+  // background: rgb(255, 247, 247);
+  display: flex;
+  justify-content: center;
+
+
+.suggCon {
+  width: 800px;
+  position: absolute;
+  z-index: 100;
+  top:0;
+  // width: 1000px;
+  border: none;
+  border-right: none;
+  margin-right: 27px;
+  outline: none;
+  // color: #fff;
+  font-size: 17px;
+  font-family: Sarabun;
+  font-style: normal;
+  // font-weight: bold;
+  background-color: rgb(10, 64, 80);
+
+  .sugg {
+    // width: 100px;
+    color: #f8f8f8;
+    padding: 8px 0 8px 18px;
+    border-bottom: 1px solid rgba(6, 47, 59, 0.8);
+    cursor: pointer;
+    // position: absolute;
+    display: flex;
+
+    &:hover {
+      background-color: rgb(14, 55, 68);
+    }
+  }
+}
 }
 
 .contentContainer {
