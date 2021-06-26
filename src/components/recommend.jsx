@@ -1,4 +1,4 @@
-import React, { useEffect, useState , useCallback} from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import axios from 'axios'
 import { Scrollbars } from 'react-custom-scrollbars';
 import Loader from './loading'
@@ -37,17 +37,17 @@ function Recommend(props) {
     const [noData, setNoData] = useState(true)
 
     const toggleNoData = useCallback(() => {
-        if(selectedValue==='movie'){
-            setNoData(Object.keys(movie).length===0)
+        if (selectedValue === 'movie') {
+            setNoData(Object.keys(movie).length === 0)
         }
-        else{
-            setNoData(Object.keys(music).length===0)
+        else {
+            setNoData(Object.keys(music).length === 0)
         }
     })
 
-    useEffect(()=>{
+    useEffect(() => {
         toggleNoData()
-    },[selectedValue])
+    }, [selectedValue])
 
     useEffect(() => {
         toggleNoData()
@@ -79,28 +79,28 @@ function Recommend(props) {
 
     }
 
-        //toggle no data based on selected value
+    //toggle no data based on selected value
 
 
     const onInputChange = (text) => {
         setSearchQuery(text)
 
         setBDisabled(isEmpty(text))
-        if(selectedValue==='movie')
-       { let matches = []
-        // console.log(searchQuery)
-        // console.log(sugg);
-        if (text.length > 0) {
-            matches = list.filter(sug => {
-                const regex = new RegExp(`${text}`, 'gi')
-                return sug.match(regex)
-            })
-            // console.log(matches)
-            setSuggestion(matches)
-        } else {
-            setSuggestion([])
+        if (selectedValue === 'movie') {
+            let matches = []
+            // console.log(searchQuery)
+            // console.log(sugg);
+            if (text.length > 0) {
+                matches = list.filter(sug => {
+                    const regex = new RegExp(`${text}`, 'gi')
+                    return sug.match(regex)
+                })
+                // console.log(matches)
+                setSuggestion(matches)
+            } else {
+                setSuggestion([])
+            }
         }
-    }
         // console.log(searchQuery);
     }
 
@@ -319,12 +319,12 @@ function Recommend(props) {
 
             {loading ? <Loader /> : null}
             <div className="suggWraper">
-            <div className='suggCon'>
-                {suggestion && suggestion.slice(0, 5).map((e, i) =>
-                    <div className='sugg' onClick={() => suggestHandler(e)}
-                        key={i} >{e}</div>
-                )}
-            </div>
+                <div className='suggCon'>
+                    {suggestion && suggestion.slice(0, 5).map((e, i) =>
+                        <div className='sugg' onClick={() => suggestHandler(e)}
+                            key={i} >{e}</div>
+                    )}
+                </div>
             </div>
 
             {selectedValue === 'movie' ? movieCom() : musicCom()}
