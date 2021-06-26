@@ -115,6 +115,9 @@ a {
     width: 200px;
     // margin-top: 80px;
     opacity: 0.2;
+    position: absolute;
+    top: 40%;
+    right: 45%;
 
     @media screen and (max-width: 768px) {
       display: none;
@@ -127,6 +130,14 @@ a {
     margin-top: 40px;
     // padding-left: 25px;
     font-weight: 600;
+    position: absolute;
+    top: 65%;
+    right: 42%;
+
+    @media screen and (max-width: 768px) {
+      display: flex;
+      position: initial;
+    }
   }
 
   justify-content: center;
@@ -260,6 +271,37 @@ body {
   margin: 20px 0px 0 0px;
 }
 
+.suggCon {
+  width: 800px;
+  position: relative;
+  z-index: 100;
+  // width: 1000px;
+  border: none;
+  border-right: none;
+  margin-right: 27px;
+  outline: none;
+  // color: #fff;
+  font-size: 17px;
+  font-family: Sarabun;
+  font-style: normal;
+  // font-weight: bold;
+  background-color: rgb(10, 64, 80);
+
+  .sugg {
+    // width: 100px;
+    color: #f8f8f8;
+    padding: 8px 0 8px 18px;
+    border-bottom: 1px solid rgba(6, 47, 59, 0.8);
+    cursor: pointer;
+    // position: absolute;
+    display: flex;
+
+    &:hover {
+      background-color: rgb(14, 55, 68);
+    }
+  }
+}
+
 select {
   width: 150px;
   border: none;
@@ -376,7 +418,7 @@ select {
 
 .wrap {
   width: 100%;
-  display: inline-flex;
+  display: flex;
 }
 
 .alert_div {
@@ -387,7 +429,6 @@ select {
 .contentContainer {
   width: 100%;
   scroll-behavior: smooth;
-
 
   button {
     outline: none;
@@ -440,7 +481,7 @@ select {
   letter-spacing: 0.04em;
   outline: none;
   border: none;
-  margin: 20px 0 0 20px;
+  // margin: 20px 0 0 20px;
 
   &:disabled {
     cursor: not-allowed;

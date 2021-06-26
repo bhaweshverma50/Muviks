@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Scrollbars } from 'react-custom-scrollbars';
 import Loader from './loading'
@@ -7,16 +7,19 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Empty from '../img/empty.svg'
 
+let dict = require('../sugg.json')
+
 function Recommend(props) {
-    // const [sugg, setSugg] = useState([])
-    // useEffect(() => {
-    //     const loadSugg = async () => {
-    //         const resu = await axios.get('https://movie-api909.herokuapp.com/movie')
-    //         setSugg(resu.data)
-    //         console.log(resu)
-    //     }
-    //     loadSugg()
-    // }, [])
+    const [list, setList] = useState([])
+    const [suggestion, setSuggestion] = useState([])
+    useEffect(() => {
+        const loadSugg = async () => {
+            // const resu = await axios.get('http://127.0.0.1:5000/suggestion')
+            setList(dict.data)
+            // console.log(dict.data)
+        }
+        loadSugg()
+    }, [])
 
     const [selectedValue, setSelectedValue] = useState('movie')
     const [searchQuery, setSearchQuery] = useState('')
@@ -28,17 +31,13 @@ function Recommend(props) {
     //state for loading
     const [loading, setLoading] = useState(false)
 
-    // const [isDownloadDisabled, setIsDownloadDisabled] = useState(false)
-
-
-
     const [isDisabled, setIsDisabled] = useState(false)
     const [bDisbaled, setBDisabled] = useState(true)
     const [noData, setNoData] = useState(true)
 
 
     const localMovie = localStorage.getItem('movie');
-    if(localMovie){
+    if (localMovie) {
         // setMovie(localMovie)
         // console.log(localMovie);
     }
@@ -58,10 +57,20 @@ function Recommend(props) {
 
     }
 
-    const onInputChange = (e) => {
-        setSearchQuery(e.target.value)
-        setBDisabled(isEmpty(e.target.value))
-
+    const onInputChange = (text) => {
+        setSearchQuery(text)
+        setBDisabled(isEmpty(text))
+        let matches = []
+        // console.log(searchQuery)
+        // console.log(sugg);
+        if (searchQuery.length > 0) {
+            matches = list.filter(sug => {
+                const regex = new RegExp(`${searchQuery}`, 'gi')
+                return sug.match(regex)
+            })
+            // console.log(matches)
+            setSuggestion(matches)
+        }
         // console.log(searchQuery);
     }
 
@@ -79,7 +88,7 @@ function Recommend(props) {
         const value = e.target.value
         setSearchQuery(value)
         onAPIFetch(selectedValue, value)
-        console.log(searchQuery);
+        // console.log(searchQuery);
     }
 
     const onAPIFetch = (type, name) => {
@@ -88,10 +97,9 @@ function Recommend(props) {
             setLoading(true)
             setIsDisabled(true)
             const url = `https://movie-api909.herokuapp.com/${type}?${type === 'movie' ? 'title' : 'track'}=${name}`
-            console.log(url);
+            // console.log(url);
             axios.get(url)
                 .then(res => {
-                    // console.log(typeof res.data);
                     setIsDisabled(false)
                     setLoading(false)
 
@@ -109,16 +117,14 @@ function Recommend(props) {
                     }
                     if (res.data === 'Movie not in Database') { toast.error(res.data) }
                     if (res.data === 'Sorry! Seems like there is no match!') { toast.error(res.data) }
-                    console.log(res.data)
+                    // console.log(res.data)
                 })
                 .catch(err => {
-                    console.log(err)
+                    // console.log(err)
                     setIsDisabled(false)
                     setLoading(false)
                     toast.error('Oops! Server Error')
                 })
-
-            // console.log(movie);
         }
 
     }
@@ -137,7 +143,6 @@ function Recommend(props) {
                     {
                         movieIndex.reverse().map(qMovies => {
 
-                            // console.log("qMovie", qMovies);
                             return (
                                 <div className="recommendedContentContainer">
                                     <p>Recommendations based on <span>{qMovies}</span>: </p>
@@ -174,7 +179,6 @@ function Recommend(props) {
                     autoHideTimeout={1000}
                     autoHideDuration={200}>
                     {musicIndex.reverse().map(qMusic => {
-                        // console.log("qMovie", qMovies);
                         return (
                             <div className="recommendedContentContainer">
                                 <p>Recommendation based on <span>{qMusic}</span>: </p>
@@ -189,6 +193,10 @@ function Recommend(props) {
                         )
                     })}
                 </Scrollbars>
+                {noData ? <div className="emptyLogo">
+                    <img src={Empty} alt='empty' />
+                    <h2>There is no data!</h2>
+                </div> : null}
             </div>
 
         )
@@ -231,10 +239,7 @@ function Recommend(props) {
                 }
             }
             return null
-
         })
-
-
 
         const element = document.createElement("a");
         const file = new Blob([strVar], { type: 'text/plain' });
@@ -242,6 +247,12 @@ function Recommend(props) {
         element.download = isMovieSelected ? "myFavouriteMovies.txt" : "myFavouriteMusics.txt";
         document.body.appendChild(element); // Required for this to work in FireFox
         element.click();
+    }
+
+    const suggestHandler = (searchQuery) => {
+        // console.log(searchQuery)
+        setSearchQuery(searchQuery)
+        setSuggestion([])
     }
 
     return (
@@ -253,16 +264,31 @@ function Recommend(props) {
                         <option value='movie'>Movies</option>
                         <option value='music'>Songs</option>
                     </select>
-                    <input onChange={onInputChange} value={searchQuery} type="text" className="searchTerm" placeholder="What are you looking for?" />
+                    <input onChange={e => onInputChange(e.target.value)} value={searchQuery} type="text" className="searchTerm" placeholder="What are you looking for?" onBlur={() => {
+                        // console.log('blur');
+                        setTimeout(() => {
+                            setSuggestion([])
+                        }, 300)
+                    }} />
+
                     <button disabled={isDisabled || bDisbaled} onClick={onSubmit} className="searchButton">
                         Search
                     </button>
+                    {!noData ? <button disabled={isDisabled || bDisbaled} onClick={downloadFavorites} className='save'>
+                        Save
+                    </button> : null}
                 </div>
-                <div>
+                {/* <div>
                     <button disabled={isDisabled || bDisbaled} onClick={downloadFavorites} className='save'>
                         Save
                     </button>
-                </div>
+                </div> */}
+            </div>
+            <div className='suggCon'>
+                {suggestion && suggestion.slice(0, 5).map((e, i) =>
+                    <div className='sugg' onClick={() => suggestHandler(e)}
+                        key={i} >{e}</div>
+                )}
             </div>
             {loading ? <Loader /> : null}
 

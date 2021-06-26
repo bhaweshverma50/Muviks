@@ -103,6 +103,9 @@ a {
 .emptyLogo img {
   width: 200px;
   opacity: 0.2;
+  position: absolute;
+  top: 40%;
+  right: 45%;
 }
 
 @media screen and (max-width: 768px) {
@@ -116,6 +119,18 @@ a {
   text-align: center;
   margin-top: 40px;
   font-weight: 600;
+  position: absolute;
+  top: 65%;
+  right: 42%;
+}
+
+@media screen and (max-width: 768px) {
+  .emptyLogo h2 {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    position: initial;
+  }
 }
 
 body {
@@ -264,6 +279,34 @@ body {
   margin: 20px 0px 0 0px;
 }
 
+.suggCon {
+  width: 800px;
+  position: relative;
+  z-index: 100;
+  border: none;
+  border-right: none;
+  margin-right: 27px;
+  outline: none;
+  font-size: 17px;
+  font-family: Sarabun;
+  font-style: normal;
+  background-color: #0a4050;
+}
+
+.suggCon .sugg {
+  color: #f8f8f8;
+  padding: 8px 0 8px 18px;
+  border-bottom: 1px solid rgba(6, 47, 59, 0.8);
+  cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.suggCon .sugg:hover {
+  background-color: #0e3744;
+}
+
 select {
   width: 150px;
   border: none;
@@ -406,9 +449,9 @@ select:hover {
 
 .wrap {
   width: 100%;
-  display: -webkit-inline-box;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .alert_div {
@@ -475,7 +518,6 @@ select:hover {
   letter-spacing: 0.04em;
   outline: none;
   border: none;
-  margin: 20px 0 0 20px;
 }
 
 .save:disabled {
