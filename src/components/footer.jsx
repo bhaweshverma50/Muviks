@@ -7,7 +7,7 @@ export default class Footer extends Component {
             <div className="footer">
 
                 <p>
-                    Made with <AiFillHeart style={{ color: 'red' }} /> by Bhawesh | Abhishek | Ankur | Arpan | Sanjeev
+                    Made with <AiFillHeart style={{ color: 'red' }} /> by Bhawesh | Abhishek
                 </p>
             </div>
         )
